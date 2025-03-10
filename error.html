@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Operations</title>
+    <style>
+        body {
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            margin: 30px;
+        }
+        label, button {
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 5px;
+            width: 150px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Arithmetic Operations</h1>
+
+    <label for="value1">Value 1:</label>
+    <input type="text" id="value1"><br><br>
+
+    <label for="value2">Value 2:</label>
+    <input type="text" id="value2"><br><br>
+    <div class="result">
+        <h3>Results:</h3>
+        <span id="sum"></span><br>
+        <span id="sub"></span><br>
+        <span id="mul"></span><br>
+        <span id="div"></span><br>
+        <span id="mod"></span><br>
+        <span id="error-message" class="error"></span>
+    </div><br><br>
+
+    <button onclick="performSum()">Sum</button>
+    <button onclick="performSub()">Sub</button>
+    <button onclick="performMul()">Mul</button>
+    <button onclick="performDiv()">Div</button>
+    <button onclick="performMod()">Mod</button>
+
+    <script>
+        function getValues() {
+            var value1 = parseFloat(document.getElementById('value1').value);
+            var value2 = parseFloat(document.getElementById('value2').value);
+
+            // Check if inputs are valid numbers
+            if (isNaN(value1) || isNaN(value2)) {
+                document.getElementById('error-message').textContent = "Please enter valid numbers for both values.";
+                return null;
+            }
+            document.getElementById('error-message').textContent = ''; // Clear error message if valid
+            return { value1, value2 };
+        }
+
+        function performSum() {
+            var values = getValues();
+            if (values) {
+                var { value1, value2 } = values;
+                var sum = value1 + value2;
+                document.getElementById('sum').textContent = "Sum: " + sum;
+            }
+        }
+
+        function performSub() {
+            var values = getValues();
+            if (values) {
+                var { value1, value2 } = values;
+                var sub = value1 - value2;
+                document.getElementById('sub').textContent = "Subtraction: " + sub;
+            }
+        }
+
+        function performMul() {
+            var values = getValues();
+            if (values) {
+                var { value1, value2 } = values;
+                var mul = value1 * value2;
+                document.getElementById('mul').textContent = "Multiplication: " + mul;
+            }
+        }
+
+        function performDiv() {
+            var values = getValues();
+            if (values) {
+                var { value1, value2 } = values;
+                if (value2 !== 0) {
+                    var div = value1 / value2;
+                    document.getElementById('div').textContent = "Division: " + div;
+                } else {
+                    document.getElementById('div').textContent = "Cannot divide by zero.";
+                }
+            }
+        }
+
+        function performMod() {
+            var values = getValues();
+            if (values) {
+                var { value1, value2 } = values;
+                if (value2 !== 0) {
+                    var mod = value1 % value2;
+                    document.getElementById('mod').textContent = "Modulus: " + mod;
+                } else {
+                    document.getElementById('mod').textContent = "Cannot mod by zero.";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
